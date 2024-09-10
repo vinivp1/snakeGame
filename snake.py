@@ -11,13 +11,22 @@ class Snake:
 
     def __init__(self):
         self.segments = []
+        self.create_snake()
+        self.head = self.segments[0]
+
+    def create_snake(self):
         for position in STARTING_POSITIONS:
-            new_snake = Turtle(shape="square")
-            new_snake.color("white")
-            new_snake.penup()
-            new_snake.goto(position)
-            self.segments.append(new_snake)
-            self.head = self.segments[0]
+            self.add_segment(position)
+
+    def add_segment(self,position):
+        new_snake = Turtle(shape="square")
+        new_snake.color("green")
+        new_snake.penup()
+        new_snake.goto(position)
+        self.segments.append(new_snake)
+
+    def extend(self):
+        self.add_segment(self.segments[-1].position()) #Catch the last position in the list and add another one
 
     def move(self):
         for seg_num in range(len(self.segments)-1, 0, -1):
